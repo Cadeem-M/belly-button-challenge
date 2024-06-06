@@ -18,7 +18,7 @@ function buildMetadata(sample) {
     // Inside a loop, you will need to use d3 to append new
     // tags for each key-value in the filtered metadata.
     for (let k in filtData[0]){
-    demoInfoPanel.append('p').text(`${k}: ${filtData[k]}`);
+    demoInfoPanel.append('p').text(`${k}: ${filtData.k}`);
 
     }
   });
@@ -40,10 +40,17 @@ function buildCharts(sample) {
     let sampVal = filtSamps[0].sample_values
 
     // Build a Bubble Chart
+    let trace = {
+      values: sampVal,
+      labels: otuLabels,
+      type: "scatter",
+      size: otuId,
+    };
 
+    let plotData = [trace];
 
     // Render the Bubble Chart
-
+    Plotly.newPlot("bubble", data, layout);
 
     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
 
@@ -62,28 +69,34 @@ function init() {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
 
     // Get the names field
-
+   let nameField = data.names;
 
     // Use d3 to select the dropdown with id of `#selDataset`
-
+    let selectData = d3.select('#selDataset');
 
     // Use the list of sample names to populate the select options
     // Hint: Inside a loop, you will need to use d3 to append a new
     // option for each sample name.
-
+    for (let names of nameField){
+      selectData.append('p').text(`${names}`)
+    };
 
     // Get the first sample from the list
-
+    let firstSamp = nameField[0];
 
     // Build charts and metadata panel with the first sample
-
+    buildMetadata(firstSamp);
+    buildCharts(firstSamp);
   });
 }
 
 // Function for event listener
 function optionChanged(newSample) {
   // Build charts and metadata panel each time a new sample is selected
-
+let dropDownMenu = d3.select('#selDataset');
+let selectedSamp = dropDownMenu.property("value");
+buildMetadata(selectedSamp);
+buildCharts(selectedSamp);
 }
 
 // Initialize the dashboard
