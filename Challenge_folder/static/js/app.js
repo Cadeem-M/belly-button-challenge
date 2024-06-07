@@ -18,7 +18,7 @@ function buildMetadata(sample) {
     // Inside a loop, you will need to use d3 to append new
     // tags for each key-value in the filtered metadata.
     for (let k in filtData[0]){
-    demoInfoPanel.append('p').text(`${k}: ${filtData.k}`);
+    demoInfoPanel.append('p').text(`${k}: ${filtData[0][k]}`);
 
     }
   });
@@ -39,27 +39,60 @@ function buildCharts(sample) {
     let otuLabels = filtSamps[0].otu_labels
     let sampVal = filtSamps[0].sample_values
 
-    // Build a Bubble Chart
+      // Build a Bubble Chart
     let trace = {
-      values: sampVal,
-      labels: otuLabels,
+      x: otuId,
+      y: sampVal,
+      text: otuLabels,
+      mode: 'markers',
+      marker: {size: sampVal, color: otuId},
       type: "scatter",
-      size: otuId,
+     
     };
 
     let plotData = [trace];
 
+    let layout = {
+      title: 'Bacteria Cultures Per Sample',
+      showlegend: false,
+      height: 500,
+      width: 1500
+    }
+
     // Render the Bubble Chart
-    Plotly.newPlot("bubble", data, layout);
+    Plotly.newPlot("bubble", plotData, layout);
 
     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
-
-
+    let ticks = otuId.map(item => `OTU ${item}`);
+    let yticks = ticks.slice(0,10).reverse()
+   
     // Build a Bar Chart
     // Don't forget to slice and reverse the input data appropriately
+    let topTenVal = sampVal.slice(0,10).reverse();
+    let topTenOtu = otuId.slice(0,10).reverse();
+    let topTenLabels = otuLabels.slice(0, 10).reverse();
 
-
+    console.log(topTenOtu);
     // Render the Bar Chart
+
+    let trace2 = {
+      type: 'bar',
+      x: topTenVal,
+      y: yticks,
+      orientation: 'h',
+      text: topTenLabels
+    };
+
+    let data2 = [trace2]
+
+    let layout2 = {
+      title: 'Top 10 Bacteria Cultures Found',
+      showlegend: false,
+      height: 500,
+      width: 1000
+    }
+    
+    Plotly.newPlot("bar", data2, layout2)
 
   });
 }
@@ -73,12 +106,12 @@ function init() {
 
     // Use d3 to select the dropdown with id of `#selDataset`
     let selectData = d3.select('#selDataset');
-
+    
     // Use the list of sample names to populate the select options
     // Hint: Inside a loop, you will need to use d3 to append a new
     // option for each sample name.
     for (let names of nameField){
-      selectData.append('p').text(`${names}`)
+      selectData.append('option').text(names) 
     };
 
     // Get the first sample from the list
