@@ -20,7 +20,7 @@ On the left side of the page is a Subject id panel that can be used to select an
 <img src="Resources\Screenshot 2024-06-10 092311.png" width="300px">
 </p>
 
-Once the sample whose want to view is selected, 3 updates should happen. Firstly, the demographic info panel underneath the subject id panel will be updated to reflect the personal information of the selected subject.
+Once the sample whom users want to view is selected, 3 updates should happen. Firstly, the demographic info panel underneath the subject id panel will be updated to reflect the personal information of the selected subject.
 
 <p align="center">
 <img src="Resources\Screenshot 2024-06-10 142247.png" width="300px">
