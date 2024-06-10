@@ -1,5 +1,8 @@
 # belly-button-challenge
 
+<p align="center">
+<img src="https://smartcdn.gprod.postmedia.digital/healthing/wp-content/uploads/2021/05/navel.jpg?quality=90&strip=all&w=1150&h=646" width="900px">
+</p>
 
 
 ## Introduction
@@ -47,3 +50,5 @@ This app uses D3 library and plotly to generate its visuals in a web browser.
 Perhaps in the future, I may extend this app's features to include the option of selecting two sample IDs and generating a stacked bar chart to help visualize the comparisons between two subjects. Check back by June 24th, 2024 to see if I follow through.
 
 
+## Credit (for image used in introduction)
+Beare, Nick. "Know your body: All about the belly button". Digital Image. Healthing. May. 21 2021, https://www.healthing.ca/wellness/know-your-body-belly-buttons-and-their-risks  
